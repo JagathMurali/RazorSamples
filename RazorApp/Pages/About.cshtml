@@ -1,0 +1,37 @@
+﻿@page
+@inject Microsoft.Extensions.Configuration.IConfiguration _config;
+@model AboutModel
+@{
+    ViewData["Title"] = "About";
+}
+@section Scripts
+    {
+    <script src='https://www.google.com/recaptcha/api.js    '></script>
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@Model.Message</h3>
+
+<form method="post" >
+    <div class="g-recaptcha" data-sitekey="@_config["GoogleReCaptcha:key"]"></div>
+
+    <p>Use this area to provide additional information.</p>
+    <button type="submit" >Submit</button>
+</form>
+<script>
+    window.onload = function () {
+        var $recaptcha = document.querySelector('#g-recaptcha-response');
+        if ($recaptcha) {
+            $recaptcha.setAttribute("required", "required");
+        };
+</script>
+<style>
+    #g-recaptcha-response {
+        display: block !important;
+        position: absolute;
+        margin: -78px 0 0 0 !important;
+        width: 302px !important;
+        height: 76px !important;
+        z-index: -999999;
+        opacity: 0;
+    }
+</style>
